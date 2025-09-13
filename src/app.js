@@ -1,18 +1,18 @@
-import express, { urlencoded } from 'express'
-import cors from 'cors'
-import cookieParser from 'cookie-parser'
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import authRoutes from './routes/auth.js';
+import tenantRoutes from './routes/tenants.js';
+import notesRoutes from './routes/notes.js';
 
-const app = express()
-app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true
-}))
+dotenv.config();
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-app.use(express.json())
-app.use(urlencoded({extended: true}))
-app.use(express.static("public"))
-app.use(cookieParser())
+app.get('/health', healthRoute);
+app.use('/auth', authRoutes);
+app.use('/tenants', tenantRoutes);
+app.use('/notes', notesRoutes);
 
-
-
-export { app } //named export thats why its wrapped in curly braces and when it is imported it needs to be called with "app"
+export { app };
