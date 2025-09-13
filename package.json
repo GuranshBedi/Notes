@@ -7,9 +7,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js --watch .",
-    "seed": "node utils/seed.js"
+    "dev": "nodemon src/index.js --watch src",
+    "start": "node src/index.js",
+    "seed": "node src/utils/seed.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

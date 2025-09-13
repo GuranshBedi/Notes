@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import { Tenant } from "../models/tenant.model.js";
 import { User } from "../models/User.model.js";
 import { ApiError } from "../utils/ApiError.js";
@@ -14,7 +14,7 @@ const upgradeTenant = asyncHandler(async (req, res) => {
     throw new ApiError(400, "tenantId is required")
 
   if (String(req.user.tenant._id) !== String(tenantId))
-    throw new ApiError(403, "Forbidden: cannot upgrade other tenant")
+    throw new ApiError(403, "Cannot upgrade other tenant")
 
   const tenant = await Tenant.findById(tenantId);
   if (!tenant) throw new ApiError(404, "Tenant not found")
