@@ -1,9 +1,15 @@
-import mongoose from "mongoose";
+import mongoose,{ Schema } from "mongoose";
 
-const NoteSchema = new mongoose.Schema(
+const NoteSchema = new Schema(
   {
-    title: { type: String, default: "" },
-    content: { type: String, default: "" },
+    title: { 
+      type: String, 
+      default: "" 
+    },
+    content: { 
+      type: String, 
+      default: "" 
+    },
     tenant: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Tenant",
