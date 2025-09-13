@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcyrpt from "bcrypt"
 
 const userSchema = new Schema(
   {
@@ -20,5 +21,17 @@ const userSchema = new Schema(
     timestamps: true
   }
 );
+
+userSchema.pre("save" , () => {
+  if(!this.isModified("password"))
+    return next()
+  this.password = bcyrpt.hash(this.password,10)
+  next()
+})
+
+userSchema.methods.isPasswordCorrect = async function(password) {
+   return await bcyrpt.compare(password, this.password)
+
+}
 
 export const User = mongoose.model("User", userSchema);
