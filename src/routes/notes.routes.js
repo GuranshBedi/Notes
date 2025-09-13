@@ -1,4 +1,4 @@
-import auth from "../middleware/auth.js";
+import { verifyJWT } from "../middlewares/auth.js";
 import { Router } from "express";
 import {
   createNote,
@@ -6,14 +6,14 @@ import {
   getNote,
   updateNote,
   deleteNote,
-} from "../controllers/notesController.js";
+} from "../controllers/note.controller.js";
 
 const router = Router();
 
-router.post("/", auth, createNote);
-router.get("/", auth, listNotes);
-router.get("/:id", auth, getNote);
-router.put("/:id", auth, updateNote);
-router.delete("/:id", auth, deleteNote);
+router.post("/", verifyJWT, createNote);
+router.get("/", verifyJWT, listNotes);
+router.get("/:id", verifyJWT, getNote);
+router.put("/:id", verifyJWT, updateNote);
+router.delete("/:id", verifyJWT, deleteNote);
 
 export default router;

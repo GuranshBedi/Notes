@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import auth from '../middleware/auth.js';
-import { requireRole } from '../middleware/roles.js';
-import { upgradeTenant, inviteUser } from '../controllers/tenantsController.js';
+import { verifyJWT , requireMember , requireAdmin} from '../middlewares/auth.js';
+import { requireRole } from '../middlewares/role.js';
+import { upgradeTenant, inviteUser } from '../controllers/tenant.controller.js';
 
 const router = Router();
 
-router.post('/:tenantId/upgrade', auth, requireRole('admin'), upgradeTenant);
-router.post('/:tenantId/invite', auth, requireRole('admin'), inviteUser);
+router.post('/:tenantId/upgrade', verifyJWT, requireAdmin, upgradeTenant);
+router.post('/:tenantId/invite', verifyJWT, requireAdmin, inviteUser);
 
 export default router;
