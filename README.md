@@ -76,7 +76,7 @@ VITE_API_URL=http://localhost:5000
 Run the frontend:
 
 ```bash
-npm start
+npm run dev
 ```
 
 The app will run on http://localhost:3000.
